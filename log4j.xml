@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<errorHandler class="org.apache.log4j.helpers.OnlyOnceErrorHandler" />
+		<param name="Target" value="System.out" />
+		<param name="Threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%X{trace-id}] [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="HOTEL_AVAILABIITY" class="log4j.RollingPerInvokeFileAppender">
+		<param name="append" value="false" />
+		<param name="File" value="/var/log/rezg/app/bonologs/fileNamex" />
+		<param name="Threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%X{ridelogid}] %m%n" />
+		</layout>
+	</appender>
+	
+	
+	
+	<appender name="AIR_AVAILABIITY" class="org.apache.log4j.RollingFileAppender">
+		<param name="append" value="false" />
+		<param name="maxFileSize" value="100KB" />
+		<param name="File" value="/var/log/rezg/app/bono-airlogs/airlogs.log" />
+		<param name="Threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+	
+ 	<appender name="AIR_AVAILABIITY-DRFA" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="append" value="true" />
+		<param name="File" value="/var/log/rezg/app/bono-airlogs/airlogs.log" />
+		<param name="Threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %-5p [%c] %m%n" />
+		</layout>
+	</appender>
+
+	<logger name="log4j.hotel">
+		<appender-ref ref="HOTEL_AVAILABIITY" />
+	</logger>
+
+	<logger name="log4j.air">
+		<appender-ref ref="AIR_AVAILABIITY" />
+	</logger>
+
+	<root>
+		<priority value="INFO" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</log4j:configuration>
